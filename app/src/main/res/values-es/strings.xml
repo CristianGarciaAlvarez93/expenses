@@ -9,6 +9,7 @@
     <string name="add_expense_button">Agregar gasto</string>
     <string name="amount">Valor</string>
     <string name="all_time">Todo el tiempo</string>
+    <string name="custom_date">Escoger fecha</string>
     <string name="application">Aplicación</string>
     <string name="cancel">Cancelar</string>
     <string name="channel_name_default">Canal por defecto</string>
@@ -72,8 +73,12 @@
     <string name="system_default">Por defecto</string>
     <string name="ok">OK</string>
     <string name="theme">Tema</string>
-    <string name="this_month">Este mes</string>
     <string name="this_week">Esta semana</string>
+    <string name="this_month">Este mes</string>
+    <string name="this_year">Este año</string>
+    <string name="last_month">Últimos 30 días</string>
+    <string name="last_three_months">Últimos 90 días</string>
+    <string name="last_year">Último año</string>
     <string name="title_hint">Titulo</string>
     <string name="today">Hoy</string>
     <string name="translate_app">Translate the app</string>

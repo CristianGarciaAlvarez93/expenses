@@ -10,7 +10,6 @@ import com.nominalista.expenses.Application
 import com.nominalista.expenses.data.model.Expense
 import com.nominalista.expenses.data.model.Tag
 import com.nominalista.expenses.data.store.DataStore
-import com.nominalista.expenses.data.firebase.FirebaseDataStore
 import com.nominalista.expenses.data.room.RoomDataStore
 import io.reactivex.Completable
 import io.reactivex.schedulers.Schedulers.io
@@ -24,17 +23,17 @@ class DataMigrationWorker(context: Context, params: WorkerParameters) :
         (applicationContext as Application).localDataStore
     }
 
-    private val cloudDataStore: DataStore by lazy {
+    /*private val cloudDataStore: DataStore by lazy {
         (applicationContext as Application).cloudDataStore
-    }
+    }*/
 
     override suspend fun doWork() = coroutineScope {
         val oldTags = getOldTags()
         insertNewTags(oldTags)
 
         val oldExpenses = getOldExpenses()
-        val newTags = getNewTags()
-        insertNewExpenses(oldExpenses, newTags)
+        // val newTags = getNewTags()
+        // insertNewExpenses(oldExpenses, newTags)
 
         deleteOldTags()
         deleteOldExpenses()
@@ -54,10 +53,10 @@ class DataMigrationWorker(context: Context, params: WorkerParameters) :
         val newTags = tagNames.map { Tag("", it) }
 
         val newTagsInsertions = newTags.map {
-            cloudDataStore.insertTag(it).ignoreElement()
+            // cloudDataStore.insertTag(it).ignoreElement()
         }
 
-        Completable.merge(newTagsInsertions).blockingAwait()
+        // Completable.merge(newTagsInsertions).blockingAwait()
     }
 
     private fun getOldExpenses(): List<Expense> {
@@ -67,11 +66,11 @@ class DataMigrationWorker(context: Context, params: WorkerParameters) :
             .blockingGet()
     }
 
-    private fun getNewTags(): List<Tag> {
+    /*private fun getNewTags(): List<Tag> {
         return cloudDataStore.getTags()
             .subscribeOn(io())
             .blockingGet()
-    }
+    }*/
 
     private fun insertNewExpenses(oldExpenses: List<Expense>, newTags: List<Tag>) {
         val newExpenses = oldExpenses.map { oldExpense ->
@@ -93,10 +92,10 @@ class DataMigrationWorker(context: Context, params: WorkerParameters) :
         }
 
         val newExpensesInsertions = newExpenses.map {
-            cloudDataStore.insertExpense(it).ignoreElement()
+            // cloudDataStore.insertExpense(it).ignoreElement()
         }
 
-        Completable.merge(newExpensesInsertions).blockingAwait()
+        // Completable.merge(newExpensesInsertions).blockingAwait()
     }
 
     private fun deleteOldTags() {

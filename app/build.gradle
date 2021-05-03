@@ -43,10 +43,10 @@ android {
     signingConfigs {
         release {
             // These properties can be placed in ~/.gradle/gradle.properties.
-            storeFile file(EXPENSES_STORE_FILE)
-            storePassword EXPENSES_STORE_PASSWORD
-            keyAlias EXPENSES_KEY_ALIAS
-            keyPassword EXPENSES_KEY_PASSWORD
+            // storeFile file(EXPENSES_STORE_FILE) TODO: Configure these files if required
+            // storePassword EXPENSES_STORE_PASSWORD
+            // keyAlias EXPENSES_KEY_ALIAS
+            // keyPassword EXPENSES_KEY_PASSWORD
         }
     }
 
@@ -108,13 +108,6 @@ dependencies {
     implementation dependencies.workRxJava
     kapt dependencies.roomCompiler
 
-    // Firebase
-    implementation dependencies.firebaseAuth
-    implementation dependencies.firebaseConfig
-    implementation dependencies.firebaseCore
-    implementation dependencies.firebaseFirestore
-    implementation dependencies.firebaseMessaging
-
     // Google Play
     implementation dependencies.googlePlayBilling
     implementation dependencies.googlePlayBillingExt
@@ -140,5 +133,3 @@ dependencies {
     androidTestImplementation testDependencies.runner
     androidTestImplementation testDependencies.roomTesting
 }
-
-apply plugin: 'com.google.gms.google-services'

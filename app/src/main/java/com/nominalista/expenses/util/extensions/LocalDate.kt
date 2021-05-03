@@ -29,6 +29,10 @@ fun LocalDate.firstDayOfMonth(): LocalDate = with(TemporalAdjusters.firstDayOfMo
 
 fun LocalDate.lastDayOfMonth(): LocalDate = with(TemporalAdjusters.lastDayOfMonth())
 
+fun LocalDate.firstDayOfYear(): LocalDate = with(TemporalAdjusters.firstDayOfYear())
+
+fun LocalDate.lastDayOfYear(): LocalDate = with(TemporalAdjusters.lastDayOfYear())
+
 // Support for old format
 
 fun LocalDate.toDate(): Date = GregorianCalendar(year, monthValue - 1, dayOfMonth).time

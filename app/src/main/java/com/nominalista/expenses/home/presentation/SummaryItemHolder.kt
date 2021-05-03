@@ -55,7 +55,12 @@ class SummaryItemHolder(itemView: View) : HomeItemHolder(itemView) {
             R.id.today -> { model.onTodayClick(); true }
             R.id.this_week -> { model.onThisWeekClick(); true }
             R.id.this_month -> { model.onThisMonthClick(); true }
+            R.id.this_year -> { model.onThisYearClick(); true }
+            R.id.last_month -> { model.onLastMonthClick(); true }
+            R.id.last_three_months -> { model.onLastThreeMonthsClick(); true }
+            R.id.last_year -> { model.onLastYearClick(); true }
             R.id.all_time -> { model.onAllTimeClick(); true }
+            R.id.custom_date -> { model.onCustomDateClick(); true }
             else -> false
         }
     }

@@ -9,6 +9,7 @@
     <string name="add_expense_button">Add expense</string>
     <string name="amount">Amount</string>
     <string name="all_time">All time</string>
+    <string name="custom_date">Custom date</string>
     <string name="application">Application</string>
     <string name="cancel">Cancel</string>
     <string name="channel_name_default">Default channel</string>
@@ -74,8 +75,12 @@
     <string name="system_default">System default</string>
     <string name="ok">OK</string>
     <string name="theme">Theme</string>
-    <string name="this_month">This month</string>
     <string name="this_week">This week</string>
+    <string name="this_month">This month</string>
+    <string name="this_year">This year</string>
+    <string name="last_month">Last 30 days</string>
+    <string name="last_three_months">Last 90 days</string>
+    <string name="last_year">Last year</string>
     <string name="title_hint">Title</string>
     <string name="today">Today</string>
     <string name="translate_app">Translate the app</string>

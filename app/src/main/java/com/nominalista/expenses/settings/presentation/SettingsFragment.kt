@@ -20,7 +20,6 @@ import com.nominalista.expenses.R
 import com.nominalista.expenses.common.presentation.Theme
 import com.nominalista.expenses.currencyselection.CurrencySelectionActivity
 import com.nominalista.expenses.data.model.Currency
-import com.nominalista.expenses.onboarding.OnboardingActivity
 import com.nominalista.expenses.util.extensions.application
 import com.nominalista.expenses.util.extensions.plusAssign
 import com.nominalista.expenses.util.extensions.startActivitySafely
@@ -81,7 +80,6 @@ class SettingsFragment : Fragment() {
     private fun bindModel() {
         compositeDisposable += model.itemModels.subscribe(adapter::submitList)
         compositeDisposable += model.selectDefaultCurrency.subscribe(::selectDefaultCurrency)
-        compositeDisposable += model.navigateToOnboarding.subscribe(::navigateToOnboarding)
         compositeDisposable += model.showMessage.subscribe(::showMessage)
         compositeDisposable += model.showActivity.subscribe(::showActivity)
         compositeDisposable += model.showThemeSelectionDialog.subscribe(::showThemeSelectionDialog)
@@ -112,11 +110,6 @@ class SettingsFragment : Fragment() {
         Handler().postDelayed({
             AppCompatDelegate.setDefaultNightMode(theme.toNightMode())
         }, NIGHT_MODE_APPLICATION_DELAY)
-    }
-
-    private fun navigateToOnboarding() {
-        OnboardingActivity.start(requireContext())
-        requireActivity().finishAffinity()
     }
 
     // Lifecycle end

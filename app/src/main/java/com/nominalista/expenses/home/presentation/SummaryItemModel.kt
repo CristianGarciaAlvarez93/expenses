@@ -31,15 +31,30 @@ class SummaryItemModel(
             TODAY -> context.getString(R.string.today)
             THIS_WEEK -> context.getString(R.string.this_week)
             THIS_MONTH -> context.getString(R.string.this_month)
+            THIS_YEAR -> context.getString(R.string.this_year)
+            LAST_MONTH -> context.getString(R.string.last_month)
+            LAST_3_MONTHS -> context.getString(R.string.last_three_months)
+            LAST_YEAR -> context.getString(R.string.last_year)
             ALL_TIME -> context.getString(R.string.all_time)
+            CUSTOM -> context.getString(R.string.custom_date)
         }
     }
 
     fun onTodayClick() = dateRangeChange?.invoke(TODAY)
 
-    fun onThisWeekClick() = dateRangeChange?.invoke(DateRange.THIS_WEEK)
+    fun onThisWeekClick() = dateRangeChange?.invoke(THIS_WEEK)
 
-    fun onThisMonthClick() = dateRangeChange?.invoke(DateRange.THIS_MONTH)
+    fun onThisMonthClick() = dateRangeChange?.invoke(THIS_MONTH)
 
-    fun onAllTimeClick() = dateRangeChange?.invoke(DateRange.ALL_TIME)
+    fun onThisYearClick() = dateRangeChange?.invoke(THIS_YEAR)
+
+    fun onLastMonthClick() = dateRangeChange?.invoke(LAST_MONTH)
+
+    fun onLastThreeMonthsClick() = dateRangeChange?.invoke(LAST_3_MONTHS)
+
+    fun onLastYearClick() = dateRangeChange?.invoke(LAST_YEAR)
+
+    fun onAllTimeClick() = dateRangeChange?.invoke(ALL_TIME)
+
+    fun onCustomDateClick() = dateRangeChange?.invoke(ALL_TIME)
 }

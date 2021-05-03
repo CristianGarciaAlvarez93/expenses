@@ -7,9 +7,6 @@ import androidx.lifecycle.ViewModelProvider
 import androidx.work.WorkInfo
 import com.nominalista.expenses.Application
 import com.nominalista.expenses.R
-import com.nominalista.expenses.authentication.AuthenticationManager
-import com.nominalista.expenses.configuration.Configuration
-import com.nominalista.expenses.configuration.FirebaseConfiguration
 import com.nominalista.expenses.settings.work.ExpenseExportWorker
 import com.nominalista.expenses.settings.work.ExpenseImportWorker
 import com.nominalista.expenses.util.reactive.DataEvent
@@ -18,28 +15,26 @@ import com.nominalista.expenses.util.reactive.Variable
 import java.util.*
 
 class HomeActivityModel(
-    application: Application,
-    private val authenticationManager: AuthenticationManager,
-    private val configuration: Configuration
+    application: Application
 ) : AndroidViewModel(application) {
 
     val isUserSignedIn: Variable<Boolean> by lazy {
-        Variable(defaultValue = authenticationManager.isUserSignedIn())
+        Variable(defaultValue = true)
     }
     val userName: Variable<String> by lazy {
-        Variable(defaultValue = authenticationManager.getCurrentUserName() ?: "")
+        Variable(defaultValue = "")
     }
     val userEmail: Variable<String> by lazy {
-        Variable(defaultValue = authenticationManager.getCurrentUserEmail() ?: "")
+        Variable(defaultValue = "")
     }
     val isBannerEnabled: Variable<Boolean> by lazy {
-        Variable(defaultValue = configuration.getBoolean(Configuration.KEY_BANNER_ENABLED))
+        Variable(defaultValue = true)
     }
     val bannerTitle: Variable<String> by lazy {
-        Variable(defaultValue = configuration.getString(Configuration.KEY_BANNER_TITLE))
+        Variable(defaultValue = "Banner title")
     }
     val bannerSubtitle: Variable<String> by lazy {
-        Variable(defaultValue = configuration.getString(Configuration.KEY_BANNER_SUBTITLE))
+        Variable(defaultValue = "Banner subtitle")
     }
 
     val navigateToOnboarding = Event()
@@ -133,7 +128,7 @@ class HomeActivityModel(
     }
 
     fun performBannerActionRequested() {
-        val bannerActionUrl = configuration.getString(Configuration.KEY_BANNER_ACTION_URL)
+        val bannerActionUrl = "https://www.google.es"
         showActivity.next(Uri.parse(bannerActionUrl))
     }
 
@@ -142,9 +137,7 @@ class HomeActivityModel(
 
         override fun <T : ViewModel?> create(modelClass: Class<T>): T {
             return HomeActivityModel(
-                application,
-                application.authenticationManager,
-                application.configuration
+                application
             ) as T
         }
     }

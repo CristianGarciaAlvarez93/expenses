@@ -8,7 +8,6 @@ import androidx.lifecycle.ViewModelProvider
 import com.nominalista.expenses.Application
 import com.nominalista.expenses.BuildConfig
 import com.nominalista.expenses.R
-import com.nominalista.expenses.authentication.AuthenticationManager
 import com.nominalista.expenses.common.presentation.Theme
 import com.nominalista.expenses.data.model.Currency
 import com.nominalista.expenses.data.preference.PreferenceDataSource
@@ -19,8 +18,7 @@ import io.reactivex.disposables.CompositeDisposable
 
 class SettingsFragmentModel(
     application: Application,
-    private val preferenceDataSource: PreferenceDataSource,
-    private val authenticationManager: AuthenticationManager
+    private val preferenceDataSource: PreferenceDataSource
 ) : AndroidViewModel(application) {
     val itemModels = Variable(emptyList<SettingItemModel>())
     val selectDefaultCurrency = Event()
@@ -50,11 +48,6 @@ class SettingsFragmentModel(
 
         val itemModels = mutableListOf<SettingItemModel>()
         itemModels += createAccountHeader(context)
-        itemModels += if (authenticationManager.isUserSignedIn()) {
-            createSignOut(context)
-        } else {
-            signUpOrSignIn(context)
-        }
 
         return itemModels
     }
@@ -67,7 +60,6 @@ class SettingsFragmentModel(
 
         return ActionSettingItemModel(title).apply {
             click = {
-                authenticationManager.signOut()
                 preferenceDataSource.setIsUserOnboarded(getApplication(), false)
                 navigateToOnboarding.next()
             }
@@ -188,8 +180,7 @@ class SettingsFragmentModel(
         override fun <T : ViewModel?> create(modelClass: Class<T>): T {
             return SettingsFragmentModel(
                 application,
-                application.preferenceDataSource,
-                application.authenticationManager
+                application.preferenceDataSource
             ) as T
         }
     }

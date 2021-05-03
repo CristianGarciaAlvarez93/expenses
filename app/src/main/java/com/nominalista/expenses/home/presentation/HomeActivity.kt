@@ -16,7 +16,6 @@ import com.google.android.material.dialog.MaterialAlertDialogBuilder
 import com.google.android.material.snackbar.Snackbar
 import com.nominalista.expenses.R
 import com.nominalista.expenses.common.presentation.BaseActivity
-import com.nominalista.expenses.onboarding.OnboardingActivity
 import com.nominalista.expenses.settings.presentation.SettingsActivity
 import com.nominalista.expenses.about.AboutActivity
 import com.nominalista.expenses.util.extensions.application
@@ -41,7 +40,6 @@ class HomeActivity : BaseActivity() {
         setContentView(R.layout.activity_home)
         setupModel()
         setupToolbar()
-        setupHeaderLayout()
         setupItemLayouts()
         setupBannerLayout()
         bindModel()
@@ -55,12 +53,6 @@ class HomeActivity : BaseActivity() {
     private fun setupToolbar() {
         setSupportActionBar(findViewById(R.id.toolbar))
         toolbar.setNavigationOnClickListener { drawerLayout.openDrawer(GravityCompat.START) }
-    }
-
-    private fun setupHeaderLayout() {
-        signUpOrSignInButton.setOnClickListener {
-            runAfterDrawerClose { model.navigateToOnboardingRequested() }
-        }
     }
 
     private fun setupItemLayouts() {
@@ -103,8 +95,6 @@ class HomeActivity : BaseActivity() {
         compositeDisposable += model.bannerSubtitle
             .subscribe { configureBannerSubtitle(it) }
 
-        compositeDisposable += model.navigateToOnboarding
-            .subscribe { navigateToOnboarding() }
         compositeDisposable += model.selectFileForImport
             .subscribe { selectFileForImport() }
         compositeDisposable += model.showExpenseImportFailureDialog
@@ -151,11 +141,6 @@ class HomeActivity : BaseActivity() {
 
     private fun configureBannerSubtitle(bannerSubtitle: String) {
         bannerSubtitleTextView.text = bannerSubtitle
-    }
-
-    private fun navigateToOnboarding() {
-        OnboardingActivity.start(this)
-        finishAffinity()
     }
 
     private fun selectFileForImport() {
